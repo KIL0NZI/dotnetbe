@@ -1,0 +1,17 @@
+<div *ngIf="!isReady" class="loading-state">
+  <p>Loading Designer...</p>
+</div>
+
+<div *ngIf="isReady && reportUrl" style="height: 100vh; width: 100%;">
+  <dx-report-designer [reportUrl]="reportUrl"
+                      height="100%">
+
+    <dxrd-request-options [host]="hostUrl"
+                          [getDesignerModelAction]="getDesignerModelAction">
+    </dxrd-request-options>
+
+    <dxrd-callbacks (BeforeRender)="OnBeforeRender($event)">
+    </dxrd-callbacks>
+
+  </dx-report-designer>
+</div>

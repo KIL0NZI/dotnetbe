@@ -1,0 +1,10 @@
+# .dockerignore
+**/bin/
+**/obj/
+**/node_modules/
+TestResults/
+.git/
+.vs/
+.vscode/
+.gitignore
+README.md

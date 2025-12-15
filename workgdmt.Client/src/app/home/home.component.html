@@ -1,0 +1,52 @@
+<div class="p-8 bg-gray-50 min-h-screen font-sans" *ngIf="!isDesignerVisible">
+  <div class="max-w-3xl mx-auto bg-white p-10 rounded-xl shadow-2xl border border-gray-100">
+
+    <h1 class="text-3xl font-bold text-gray-900 mb-6">
+      Report Creation Management
+    </h1>
+    <p class="text-gray-600 mb-8">
+    </p>
+
+    <!-- Report Type Selector Group -->
+    <div class="space-y-6">
+      <label for="reportTypeSelector" class="font-semibold text-gray-700 block mb-2 text-lg">
+        Report Type Category
+      </label>
+
+      <!-- Dropdown tied to selectedReportTypeId and updateSelectedType() -->
+      <select id="reportTypeSelector"
+              [(ngModel)]="selectedReportTypeId"
+              (change)="updateSelectedType()"
+              class="w-full px-4 py-3 border border-indigo-400 rounded-lg shadow-sm focus:outline-none focus:ring-4 focus:ring-indigo-200 text-gray-800 bg-white cursor-pointer transition duration-150">
+        <!-- Iterate over the reportTypes array from home.ts -->
+        <option *ngFor="let type of reportTypes" [value]="type.id">
+          {{ type.name }}
+        </option>
+      </select>
+
+      <!-- Display Current Selected Type Details -->
+      <ng-container *ngIf="currentType">
+        <!-- OLD access was via currentType.description -->
+        {{ currentType.description }}
+
+        <!-- NEW access uses the getter property directly -->
+        {{ currentType.description }}     
+      </ng-container>
+
+      <!-- Action Button: Triggers the startDesigner method -->
+      <button (click)="startDesigner()" 
+              class="w-full px-4 py-3 mt-6 text-black font-bold bg-indigo-600 rounded-lg shadow-md hover:bg-indigo-700 transition duration-300 ease-in-out transform hover:scale-[1.01] focus:outline-none focus:ring-4 focus:ring-indigo-500">
+        Start Designing Report ({{ selectedPrefix }})
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- Placeholder for the actual Designer Component (when isDesignerVisible is true) -->
+<div *ngIf="isDesignerVisible" class="text-center p-16 bg-white border border-dashed border-red-400 max-w-3xl mx-auto mt-8 rounded-xl">
+  <h2 class="text-2xl font-bold text-green-600 mb-4">Designer Launched!</h2>
+  <p class="text-gray-700">The application would now route to the component hosting the DevExpress Designer.</p>
+  <p class="text-sm text-gray-500 mt-2">
+    Type selected for designer launch: <strong>{{ selectedPrefix }}</strong>
+  </p>
+</div>
